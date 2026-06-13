@@ -15,7 +15,8 @@ class TextStats:
 def analyze(text: str) -> TextStats:
     char_count = len(text)
 
-    words = re.findall(r"[A-Za-z\u4e00-\u9fff]+(?:'[A-Za-z]+)*", text)
+    cleaned = re.sub(r'[^\w\s\u4e00-\u9fff]', '', text)
+    words = [w for w in cleaned.split() if w]
     word_count = len(words)
 
     sentences = re.split(r'[.!?。！？]+', text)
